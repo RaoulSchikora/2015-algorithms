@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Robert Loewe. All rights reserved.
 //
 
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -28,26 +29,37 @@ string printVector(VectorType v){
 int main(){
     
     
-    VectorType v = {0., 0.5, 0., 0., 0., 0.5};
-    GeneratorList B2 = createMatrixA(5);
+    
+    VectorType v = {/*0.3, -0.123, 17.9, 42.3,*/0., 0., 0., 0.};
+    
+    GeneratorList B2 = createMatrixH4();
     for (int i = 0; i < B2.size(); i++){
         cout << printVector(B2[i]) << endl;
     }
     cout << B2.size() << endl;
+    
+    timestamp_t t0 = get_timestamp();
+    
     Orbit solution = orbit(B2, v);
+    
+    timestamp_t t1 = get_timestamp();
+    
     cout << "size: " << solution.size() << endl;
-    for(auto s : solution){
-        cout << printVector(s) << endl;
-    }
+    cout << "time: " << (t1 - t0) / 1000000.0L << "secs" << endl;
+    cout << "time: " << (t1 - t0) / 60000000.0L << "mins" << endl;
     
-   /*
-    VectorType normal = { 16, -1, -0.5};
-    VectorType v = {1, 2, 3};
-    VectorType vector = reflection(normal, v);
-    cout << printVector(vector) << endl;
-    cout << printVector(reflection(normal, vector)) << endl;
+    // for(auto s : solution){
+    //   cout << printVector(s) << endl;
+    // }
     
-    */
+    /*
+     VectorType normal = { 16, -1, -0.5};
+     VectorType v = {1, 2, 3};
+     VectorType vector = reflection(normal, v);
+     cout << printVector(vector) << endl;
+     cout << printVector(reflection(normal, vector)) << endl;
+     
+     */
     return 0;
 }
 
